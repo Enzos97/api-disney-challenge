@@ -1,5 +1,5 @@
 #Documentacion
-
+--------------------------------------------------------------------------------------------------------------
 En el .env se alojan los siguientes datos:
 
 DB_USER=postgres
@@ -16,13 +16,14 @@ AUTH_ROUNDS=10
 SENDGRID_API_KEY=apikey
 
 La key de sengrid no se puede subir a github por eso la omito.
---------------------------------------------------------------------------------------------------------------
+
 
 A continuación, detallare el funcionamiento de cada endpoint con imágenes y compartiré el link del documento en Postman(esta informacion se encuentra mejor detallada en el pdf llamado documentacion api).
-
+--------------------------------------------------------------------------------------------------------------
 -Link al documento de Postman:  https://www.postman.com/technical-candidate-83856184/workspace/enzo/collection/20467146-a63ae1d6-899c-4442-bd99-9680e72934f1?action=share&creator=20467146
 
 Endpoints:
+----------
 -AuthRoutes (rutas de autenticación para el usuario):
 1- POST - ‘/auth/register’.
 Permite crear usuarios, genera el token para poder utilizar el resto de endpoints y envia un mail de bienvenida.
