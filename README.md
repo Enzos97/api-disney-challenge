@@ -1,4 +1,4 @@
-Documentacion
+#Documentacion
 
 En el .env se alojan los siguientes datos:
 
@@ -9,7 +9,7 @@ DB_DIALECT=postgres
 DB_HOST=localhost
 PORT=3001
 
-# Auth Config
+Auth Config
 AUTH_SECRET=authcodemaster
 AUTH_EXPIRES=1d
 AUTH_ROUNDS=10
