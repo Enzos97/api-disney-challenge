@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createMovie, deleteMovie,  getAllMovies, getMovieById } from '../controllers/movies.controllers.js';
+import { createMovie, deleteMovie,  getAllMovies, getMovieById, updateMovie } from '../controllers/movies.controllers.js';
 import auth from '../middlewares/auth.js';
 
 const router = Router();
@@ -38,14 +38,14 @@ router.put('/updatemovie/:id', auth, async(req,res)=>{
     try {
         let{id}=req.params
         let {image, title, date, rating, genres} = req.body
-        let updateMovie = await updateMovie(id,image, title, date, rating, genres)
-        res.status(200).json(updateMovie)
+        let movieUpdate = await updateMovie(id,image, title, date, rating, genres)
+        res.status(200).json(movieUpdate)
     } catch (error) {
         res.status(400).json(error.message)
     }
 })
 
-router.delete('/deletemovie/:id',async(req,res)=>{
+router.delete('/deletemovie/:id',auth,async(req,res)=>{
     try {
         let{id}=req.params
         let movieDelete = await deleteMovie(id)

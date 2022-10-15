@@ -17,6 +17,7 @@ export const getAllCharacters = async (name, age, weight, movies) => {
     if(movies){
         includes={where:{id : movies}}; 
     }; 
+
     searchConditions ={
         attributes: [...attributes],
         where:{...where}, 
@@ -39,6 +40,7 @@ export const characteDetail = async (id) => {
             }
         }
     })
+    
     return findInDb
 }
 
@@ -53,6 +55,7 @@ export const createCharacter = async (image, name, years, weight, history, movie
     let movies = await Movie_serie.findAll({
         where: { title: movies_series }
     })
+    if(!movies.length) throw new Error('The movie does not exist!')
 
     newCharacter.addMovie_serie(movies)
 
@@ -68,6 +71,7 @@ export const updateCharacter = async (id, image, name, years, wight, history, mo
     let movies = await Movie_serie.findAll({
         where: { title: movies_series }
     })
+    if(!movies) throw new Error('The movie does not exist!')
 
     findCharacter.addMovie_serie(movies)
 

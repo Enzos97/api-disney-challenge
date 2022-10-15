@@ -8,16 +8,18 @@ export const getAllMovies = async (name, genre, order) => {
     let attributes = ['id', 'title', 'image']
     let where = {};
     let searchConditions={};
-    let includes= {}
+    let includes= {};
 
     if (!name && !genre && !order) return await Movie_serie.findAll({attributes:['id', 'title', 'image']})
 
     if (name) where.title = {[Op.iLike]: `%${name}%`}
     if (genre) includes={where:{name : {[Op.iLike]: `%${genre}%`}}} 
+    if (order) {order=[['date',order]] ; attributes.push('date') }
 
     searchConditions ={
         attributes: [...attributes],
         where:{...where}, 
+        order:[...order],
         include:{ model: Genre, attributes: ['id','name'],through:{attributes:[]}, ...includes}
     }
 
@@ -57,6 +59,7 @@ export const createMovie = async (image, title, date, rating, genres) => {
     let addgenres = await Genre.findAll({
         where: { name: genres }
     })
+    if(!addgenres.length) throw new Error('The genre does not exist!')
 
     newMovie.addGenre(addgenres)
     return 'Movie was created successfully!'
@@ -64,12 +67,15 @@ export const createMovie = async (image, title, date, rating, genres) => {
 
 export const updateMovie = async (id, image, title, date, rating, genres) => {
     let data = { image, title, date, rating, genres }
-    let newMovie = await Movie_serie.update(data, { where: { id } })
+    await Movie_serie.update(data, { where: { id } })
+
+    let findMovie = await Movie_serie.findOne({where:{id}})
     let addgenres = await Genre.findAll({
         where: { name: genres }
     })
+    if(!addgenres.length) throw new Error('The genre does not exist!')
 
-    newMovie.addGenre(addgenres)
+    findMovie.addGenre(addgenres)
     return 'Movie was updated successfully!'
 }
 

@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { signIn, signUp, refreshUser } from '../controllers/auth.controllers.js';
-import auth from '../middlewares/auth.js';
+import { deleteUsers, getUsers, signIn, signUp } from '../controllers/auth.controllers.js';
+
 
 const router = Router();
 
@@ -22,23 +22,22 @@ router.post('/auth/register',async (req,res)=>{
     }
 });
 
-router.post('/reload', auth, async (req,res) =>{
+router.get('/users',async(req,res)=>{
     try {
-        let { id } = req.body;
-        let user = refreshUser(id, req.user);
-        res.json(user);
+        res.status(200).json(await getUsers())
     } catch (error) {
-        res.status(500).json(error.message);
+        res.status(400).json(error.message)
     }
-});
+})
 
-router.get("/logout", (req, res) => {
-    if (req.logout) req.logout();
-    res.status(201).json({
-      success: true
-    })
-  });
-
+router.delete('/deleteuser/:id',async(req,res)=>{
+    try {
+        let {id} = req.params;
+        res.status(200).json(await deleteUsers(id))
+    } catch (error) {
+        res.status(400).json(error.message)
+    }
+})
 export default router
 
 

@@ -9,8 +9,6 @@ import genreRoutes from './routes/genre.routes.js'
 
 dotenv.config()
 
-const { CLIENT_URL } = process.env;
-
 const app = express();
 app.use(bodyParser.json());
 app.use(morgan('dev'));
