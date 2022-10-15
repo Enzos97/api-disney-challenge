@@ -30,6 +30,18 @@ export const getAllCharacters = async (name, age, weight, movies) => {
     return findInDb
 }
 
+export const characteDetail = async (id) => {
+    let findInDb = await Character.findByPk(id, { 
+        include:{ 
+            model: Movie_serie ,
+            through: {
+                attributes: []
+            }
+        }
+    })
+    return findInDb
+}
+
 export const createCharacter = async (image, name, years, weight, history, movies_series) => {
     if (!name || !years || !weight || !history || !movies_series) throw new Error('Complete the required fields!')
 
@@ -62,10 +74,6 @@ export const updateCharacter = async (id, image, name, years, wight, history, mo
     return 'Character was updated succesfully'
 }
 
-export const characteDetail = async (id) => {
-    let findInDb = await Character.findByPk(id, { include: Movie_serie })
-    return findInDb
-}
 
 export const deleteCharacter = async (id) => {
     await Character.destroy({ where: { id } })
