@@ -25,6 +25,7 @@ A continuación, detallare el funcionamiento de cada endpoint con imágenes y co
 Endpoints:
 ----------
 -AuthRoutes (rutas de autenticación para el usuario):
+----------
 1- POST - ‘/auth/register’.
 Permite crear usuarios, genera el token para poder utilizar el resto de endpoints y envia un mail de bienvenida.
 Recibe por body “name”, “email”, “password”. Valida que no haya un usuario registrado con el mismo mail y encripta la password.
@@ -60,10 +61,12 @@ Recibe por body ‘email’ y ‘password’. Valida la existencia del mail y co
 }
 
 Retorna en caso exitoso.
+----------
 
 -Antes de seguir con el resto de enpoints es necesario autenticase con el token generado previamente:
 
 -GenreRoutes (crud):
+----------
 Permite crear, listar, editar y borrar géneros.
 1- POST - ‘/creategenre’.
 Permite crear géneros.
@@ -174,6 +177,7 @@ Recibe un ‘id’ por params.
 "the genre was deleted!"
 
 -MoviesRoutes (crud):
+----------
 Permite crear, listar, buscar, filtrar, editar y borrar películas-series.
 1- POST - ‘/createmovie’.
 Permite crear Movies-seires.
@@ -334,6 +338,7 @@ http://localhost:3001/deletegenre/9
 "the genre was deleted!"
 
 -CharacterRoutes (crud):
+----------
 
 Permite crear, listar, buscar, filtrar, editar y borrar personajes.
 
