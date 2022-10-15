@@ -16,7 +16,7 @@ export const createGenre = async (name, image) => {
     let findInDb = await Genre.findOne({ where: { name } })
 
     if (findInDb) throw new Error('The Genre whith this name already exist!')
-    let newGenre = await Genre.create({ name, image })
+    await Genre.create({ name, image })
 
     return 'Genre was created successfully!'
 }

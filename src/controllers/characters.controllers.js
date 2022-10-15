@@ -40,7 +40,7 @@ export const characteDetail = async (id) => {
             }
         }
     })
-    
+
     return findInDb
 }
 
@@ -81,5 +81,5 @@ export const updateCharacter = async (id, image, name, years, wight, history, mo
 
 export const deleteCharacter = async (id) => {
     await Character.destroy({ where: { id } })
-    return 'The movie was deleted!'
+    return 'The character was deleted!'
 }
